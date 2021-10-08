@@ -90,7 +90,7 @@ namespace NegyedikHet_IZT7L4
                 values[counter, 5] = flat.NumberOfRooms;
                 values[counter, 6] = flat.FloorArea;
                 values[counter, 7] = flat.Price;
-                values[counter, 8] = "=" + GetCell(counter + 2, 8) + "*1000000/" + GetCell(counter + 2, 7);
+                values[counter, 8] = "=" + GetCell(counter + 2, 8) + "*" + GetCell(counter + 2, 7);
                 counter++;
             }
 
