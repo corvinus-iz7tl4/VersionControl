@@ -14,11 +14,22 @@ namespace HatodikHet
     {
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> ticks;
+        List<PortfolioItem> portfolioItems = new List<PortfolioItem>();
         public Form1()
         {
             InitializeComponent();
             ticks = context.Ticks.ToList();
             dataGridView1.DataSource = ticks;
+
+            CreatePortfolio();
+        }
+        void CreatePortfolio()
+        {
+            Portfolio.Add(new PortfolioItem() { Index = "OTP", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "ZWACK", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "ELMU", Volume = 10 });
+
+            dataGridView2.DataSource = Portfolio;
         }
     }
 }
