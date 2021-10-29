@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HetedikHet_IZ7TL4.MnbServiceReference;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,23 @@ namespace HetedikHet_IZ7TL4
         public Form1()
         {
             InitializeComponent();
+            AdatokLekérdezés();
+        }
+
+        void AdatokLekérdezés()
+        {
+            var mnbService = new MNBArfolyamServiceSoapClient();
+
+            var request = new GetExchangeRatesRequestBody()
+            {
+                currencyNames = "EUR",
+                startDate = "2020-01-01",
+                endDate = "2020-06-30"
+            };
+
+            var response = mnbService.GetExchangeRates(request);
+
+            var result = response.GetExchangeRatesResult;
         }
     }
 }
