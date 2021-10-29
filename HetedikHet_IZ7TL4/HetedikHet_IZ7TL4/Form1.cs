@@ -1,4 +1,5 @@
-﻿using HetedikHet_IZ7TL4.MnbServiceReference;
+﻿using HetedikHet_IZ7TL4.Entities;
+using HetedikHet_IZ7TL4.MnbServiceReference;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +14,13 @@ namespace HetedikHet_IZ7TL4
 {
     public partial class Form1 : Form
     {
+        BindingList<RateData> Rates;
         public Form1()
         {
             InitializeComponent();
             AdatokLekérdezés();
+
+            dataGridView1.DataSource = Rates;
         }
 
         void AdatokLekérdezés()
