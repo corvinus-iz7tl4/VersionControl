@@ -17,10 +17,14 @@ namespace HetedikHet_IZ7TL4
     public partial class Form1 : Form
     {
         BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<string> Currencies = new BindingList<string>();
         public Form1()
         {
             InitializeComponent();
             RefreshData();
+
+            dataGridView1.DataSource = Rates;
+            comboBox1.DataSource = Currencies;
         }
 
         void GetExchange()
@@ -77,8 +81,6 @@ namespace HetedikHet_IZ7TL4
         {
             Rates.Clear();
             GetExchange();
-
-            dataGridView1.DataSource = Rates;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
