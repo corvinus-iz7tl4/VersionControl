@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace NyolcadikHet_IZ7TL4.Entities
 {
-    class BallFactory
+    public class BallFactory
     {
         public Ball CreateNew()
         {
-            return new Ball;
+            return new Ball();
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace NyolcadikHet_IZ7TL4
 {
-    class Ball:Label
+    public class Ball:Label
     {
         public Ball()
         {
