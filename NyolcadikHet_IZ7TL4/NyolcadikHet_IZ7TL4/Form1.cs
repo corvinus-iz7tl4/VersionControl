@@ -33,10 +33,10 @@ namespace NyolcadikHet_IZ7TL4
 
         private void createTimer_Tick(object sender, EventArgs e)
         {
-            var ball = Factory.CreateNew();
-            _toys.Add(ball);
-            ball.Left = -ball.Width;
-            mainPanel.Controls.Add(ball);
+            var toy = Factory.CreateNew();
+            _toys.Add(toy);
+            toy.Left = -toy.Width;
+            mainPanel.Controls.Add(toy);
         }
 
         private void conveyorTimer_Tick(object sender, EventArgs e)
@@ -69,11 +69,22 @@ namespace NyolcadikHet_IZ7TL4
         void DisplayNext()
         {
             if (_nextToy != null)
-                mainPanel.Controls.Remove(_nextToy);
+                Controls.Remove(_nextToy);
             _nextToy = Factory.CreateNew();
             _nextToy.Top = label1.Top + label1.Height + 20;
             _nextToy.Left = label1.Left;
-            mainPanel.Controls.Add(_nextToy);
+            Controls.Add(_nextToy);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var colorPicker = new ColorDialog();
+
+            colorPicker.Color = button.BackColor;
+            if (colorPicker.ShowDialog() != DialogResult.OK)
+                return;
+            button.BackColor = colorPicker.Color;
         }
     }
 }
