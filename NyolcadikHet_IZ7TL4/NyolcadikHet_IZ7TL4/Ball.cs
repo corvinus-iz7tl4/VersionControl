@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NyolcadikHet_IZ7TL4.Abstraction;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,28 +9,11 @@ using System.Windows.Forms;
 
 namespace NyolcadikHet_IZ7TL4
 {
-    public class Ball:Label
+    public class Ball:Toy
     {
-        public Ball()
-        {
-            AutoSize = false;
-            Height = 50;
-            Width = 50;
-            Paint += Ball_Paint;
-        }
-
-        private void Ball_Paint(object sender, PaintEventArgs e)
-        {
-            DrawImage(e.Graphics); 
-        }
-
-        protected void DrawImage(Graphics graphics)
+        protected override void DrawImage(Graphics graphics)
         {
             graphics.FillEllipse(new SolidBrush(Color.Blue), 0, 0, Width, Height);
-        }
-        public void MoveBall()
-        {
-            Left += 1;
         }
     }
 }
