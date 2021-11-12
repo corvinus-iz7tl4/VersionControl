@@ -64,7 +64,10 @@ namespace NyolcadikHet_IZ7TL4
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Factory = new BallFactory();
+            Factory = new BallFactory
+            {
+                BallColor = button2.BackColor
+            };
         }
         void DisplayNext()
         {
