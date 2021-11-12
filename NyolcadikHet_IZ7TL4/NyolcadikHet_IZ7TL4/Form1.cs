@@ -89,5 +89,14 @@ namespace NyolcadikHet_IZ7TL4
                 return;
             button.BackColor = colorPicker.Color;
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory
+            {
+                Color1 = button5.BackColor,
+                Color2 = button6.BackColor
+            };
+        }
     }
 }
