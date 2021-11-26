@@ -41,6 +41,9 @@ namespace UnitTestExample.Test
         ]
         public void TestValidatePassword(string password,bool expectedResult)
         {
+            //Arrange
+            
+            //Act
             var kisbetu = new Regex(@"[a-z]+");
             var nagybetu = new Regex(@"[A-Z]+");
             var szam = new Regex(@"[1-9]+");
@@ -48,6 +51,7 @@ namespace UnitTestExample.Test
 
             var actualResult = kisbetu.IsMatch(password) && nagybetu.IsMatch(password) && szam.IsMatch(password) && nyolc.IsMatch(password);
 
+            //Assert
             Assert.AreEqual(expectedResult, actualResult);
         }
 
