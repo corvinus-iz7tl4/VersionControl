@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnitTestExample.Controllers;
 
@@ -37,9 +38,16 @@ namespace UnitTestExample.Test
             TestCase("ab1234",false),
             TestCase("Abcd1234",true)
         ]
-        public void TestValidatePassword(string password)
+        public void TestValidatePassword(string password,bool expectedResult)
         {
+            var kisbetu = new Regex(@"[a-z]+");
+            var nagybetu = new Regex(@"[A-Z]+");
+            var szam = new Regex(@"[1-9]+");
+            var nyolc = new Regex(@".{8,}");
 
+            var actualResult = kisbetu.IsMatch(password) && nagybetu.IsMatch(password) && szam.IsMatch(password) && nyolc.IsMatch(password);
+
+            Assert.AreEqual(expectedResult, actualResult);
         }
     }
 }
