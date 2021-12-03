@@ -19,22 +19,28 @@ namespace TizenegyedikHet_IZ7TL4
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
 
         Random rng = new Random(1234);
+
+        List<int> FemaleCount = new List<int>();
+        List<int> MaleCount = new List<int>();
         public Form1()
         {
             InitializeComponent();
-            Population = GetPopulation(@"\Excels\nép-teszt.csv");
+            
             BirthProbabilities = GetBirthProbabilities(@"\Excels\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"\Excels\halál.csv");
+        }
 
-            dataGridView1.DataSource = Population;
+        private void Simulation()
+        {
+            Population = GetPopulation(textBox1.Text);
 
             // Végigmegyünk a vizsgált éveken
-            for (int year = 2005; year <= 2024; year++)
+            for (int year = 2005; year <= year_nUD.Value; year++)
             {
                 // Végigmegyünk az összes személyen
                 for (int i = 0; i < Population.Count; i++)
                 {
-                    SimStep(2024,Population[i]);
+                    SimStep(2024, Population[i]);
                 }
 
                 int nbrOfMales = (from x in Population
@@ -45,8 +51,12 @@ namespace TizenegyedikHet_IZ7TL4
                                     select x).Count();
                 Console.WriteLine(
                     string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
+
+                FemaleCount.Add(nbrOfFemales);
+                MaleCount.Add(nbrOfMales);
             }
         }
+
         private void SimStep(int year, Person person)
         {
             //Ha halott akkor kihagyjuk, ugrunk a ciklus következő lépésére
@@ -81,6 +91,15 @@ namespace TizenegyedikHet_IZ7TL4
                     Population.Add(újszülött);
                 }
 
+            }
+        }
+        private void DisplayResults()
+        {
+            for (int year = 2005; year <= year_nUD.Value; year++)
+            {
+                int i = 0;
+                richTextBox1.Text = "Szimulációs év:" + year + "\n\tFiúk:" + MaleCount[i] + "\n\tLányok:" + FemaleCount[i] + "\n\n";
+                i = i + 1;
             }
         }
         public List<Person> GetPopulation(string csvpath)
@@ -144,5 +163,23 @@ namespace TizenegyedikHet_IZ7TL4
             return dp;
         }
 
+        private void start_btn_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+            FemaleCount.Clear();
+            MaleCount.Clear();
+            
+            Simulation();
+            DisplayResults();
+        }
+
+        private void browse_btn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog()==DialogResult.OK)
+            {
+                textBox1.Text = ofd.FileName;
+            }
+        }
     }
 }
