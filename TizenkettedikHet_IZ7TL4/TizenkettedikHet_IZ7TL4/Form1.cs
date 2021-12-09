@@ -20,6 +20,8 @@ namespace TizenkettedikHet_IZ7TL4
         int nbrOfSteps = 10;
         int nbrOfStepsIncrement = 10;
         int generation = 1;
+
+        Brain winnerBrain = null;
         public Form1()
         {
             InitializeComponent();
@@ -42,10 +44,12 @@ namespace TizenkettedikHet_IZ7TL4
         {
             generation++;
             label1.Text = string.Format("{0}.generáció", generation);
+
             var playerList = from p in gc.GetCurrentPlayers()
                              orderby p.GetFitness() descending
                              select p;
             var topPerformers = playerList.Take(populationSize / 2).ToList();
+
             gc.ResetCurrentLevel();
             foreach (var p in topPerformers)
             {
@@ -60,6 +64,17 @@ namespace TizenkettedikHet_IZ7TL4
                 else
                     gc.AddPlayer(b.Mutate());
             }
+
+            var winners = from p in topPerformers
+                          where p.IsWinner
+                          select p;
+            if (winners.Count() > 0)
+            {
+                winnerBrain = winners.FirstOrDefault().Brain.Clone();
+                gc.GameOver -= Gc_GameOver;
+                return;
+            }
+
             gc.Start();
         }
     }
