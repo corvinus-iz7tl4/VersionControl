@@ -37,8 +37,7 @@ namespace TizenkettedikHet_IZ7TL4
             {
                 gc.AddPlayer(nbrOfSteps);
             }
-            gc.Start();
-        }
+            gc.Start();        }
 
         private void Gc_GameOver(object sender)
         {
@@ -71,11 +70,24 @@ namespace TizenkettedikHet_IZ7TL4
             if (winners.Count() > 0)
             {
                 winnerBrain = winners.FirstOrDefault().Brain.Clone();
+                if (winnerBrain != null)
+                {
+                    button1.Visible = true;
+                }
                 gc.GameOver -= Gc_GameOver;
                 return;
             }
 
             gc.Start();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            gc.ResetCurrentLevel();
+            gc.AddPlayer(winnerBrain.Clone());
+            gc.AddPlayer();
+            ga.Focus();
+            gc.Start(true);
         }
     }
 }
